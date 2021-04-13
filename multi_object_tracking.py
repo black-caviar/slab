@@ -21,6 +21,7 @@ ap.add_argument("-v", "--video", type=str,
 	help="path to input video file")
 ap.add_argument("-t", "--tracker", type=str, default="kcf",
 	help="OpenCV object tracker type")
+ap.add_argument("-pi", action='store_true')
 args = vars(ap.parse_args())
 
 # initialize a dictionary that maps strings to their corresponding
@@ -62,9 +63,12 @@ while True:
 		break
 
 	# resize the frame (so we can process it faster)
-	frame = imutils.resize(frame, width=600)
-	print(frame.shape)
-	center = 600//2, 450//2
+	if args.get('pi'):
+		frame = imutils.resize(frame, width=200)
+	else:
+		frame = imutils.resize(frame, width=600)
+	#print(frame.shape)
+	center = frame.shape[1]//2, frame.shape[0]//2
 	cv2.circle(frame,center,4,(0,0,255),6)
 	# grab the updated bounding box coordinates (if any) for each
 	# object that is being tracked
@@ -76,6 +80,11 @@ while True:
 		cp = compute_vector(x,y,w,h)
 		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 		cv2.arrowedLine(frame, cp, center, (0,255,0),3,8,0,0.1)
+		if x > center[0]:
+			print(x-center[0])
+		if x + w < center[0]:
+			print(x + w - center[0])
+		
 
 	# show the output frame
 	cv2.imshow("Frame", frame)
