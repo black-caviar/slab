@@ -46,7 +46,8 @@ try:
     #data = data -1;
     
     f_target = 192000;
-    resamp = signal.resample(data, f_target//fs * data.shape[0], axis=0) 
+    #resamp = signal.resample(data, f_target//fs * data.shape[0], axis=0) 
+    resamp = data
     print(resamp.shape)
     
     f_mod = 40000
