@@ -40,7 +40,7 @@ try:
     print(fs)
     print(data.shape)
 
-    M = 1
+    M = .7
     data = 1 + M * data
     print(np.mean(data))
     #data = data -1;
@@ -49,7 +49,7 @@ try:
     resamp = signal.resample(data, f_target//fs * data.shape[0], axis=0) 
     print(resamp.shape)
     
-    f_mod = 40000
+    f_mod = 38700
     
     mod_wave = np.sin(2*np.pi*f_mod*np.linspace(0, data.shape[0]/fs, resamp.shape[0]))
     mod_wave = np.array([mod_wave,mod_wave]).T
