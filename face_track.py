@@ -52,6 +52,8 @@ def computeCenter(frame, box):
 	cv2.arrowedLine(frame, face_center, frame_center, (0,255,0),3,8,0,0.1)
 	return Dx, Dy, frame
 
+Dx = 0
+Dy = 0
 while True:
 	frame = vs.read()
 	if frame is None:
